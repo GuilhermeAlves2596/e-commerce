@@ -53,12 +53,14 @@
 			<version>3.12.4</version>
 			<scope>test</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>net.bytebuddy</groupId>
 			<artifactId>byte-buddy</artifactId>
 			<version>1.10.22</version>
 			<scope>test</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>net.bytebuddy</groupId>
 			<artifactId>byte-buddy-agent</artifactId>
