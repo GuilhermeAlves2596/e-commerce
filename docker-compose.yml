@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: ecomerce
+      MYSQL_USER: alves
+      MYSQL_PASSWORD: alves2596
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  apicep:
+    image: api-cep:latest
+    container_name: apiViaCep
+    ports:
+      - "9090:9090"
+
+volumes:
+  mysql_data:
