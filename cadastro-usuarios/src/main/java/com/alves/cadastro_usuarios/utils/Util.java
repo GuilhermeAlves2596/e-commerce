@@ -1,9 +1,9 @@
-package com.alves.cadastro_usuarios.service.utils;
+package com.alves.cadastro_usuarios.utils;
 
 import org.springframework.stereotype.Component;
 
 @Component
-public class util {
+public class Util {
 
     public static boolean isNullOrBlank(String s){
         if(s == null || s.isBlank()){

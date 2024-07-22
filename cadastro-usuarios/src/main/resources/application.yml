@@ -23,4 +23,5 @@ spring:
 api:
   urlValidaCpf: "https://api.invertexto.com/v1/validator?token=8608|dnSzKD5l6gTqxdUzivgZ8wrlyZAbKeK0&value="
   type: "&type=cpf"
+  urlValidaCep: "http://localhost:9090/busca/cep/%s"
 

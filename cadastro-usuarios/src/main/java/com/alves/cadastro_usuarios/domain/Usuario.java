@@ -16,6 +16,6 @@ public class Usuario {
     private String email;
     private String numTelefone;
     private Endereco endereco;
-    private Boolean isAdm;
+    private Boolean isAdmin;
 
 }
