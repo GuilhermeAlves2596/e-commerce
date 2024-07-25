@@ -2,6 +2,12 @@ package com.alves.cadastro_usuarios.utils;
 
 public class Constantes {
 
+    public static String USUARIO_CADASTRADO= "Usuário cadastrado com sucesso.";
+    public static String USUARIO_ATUALIZADO= "Usuário atualizado com sucesso.";
+    public static String USUARIO_NAO_ATUALIZADO= "Erro ao atualizar o usuário.";
+    public static String USUARIO_NAO_ENCONTRADO= "Usuário não encontrado.";
+    public static String USUARIO_EXISTENTE= "Este cpf já esta cadastrado.";
+    public static String USUARIO_DELETE= "Usuário excluido com sucesso.";
     public static String CPF_VAZIO = "CPF não pode ser vazio";
     public static String CPF_INVALIDO = "O CPF informado é inválido.";
     public static String NOME_VAZIO = "Nome não pode ser vazio.";

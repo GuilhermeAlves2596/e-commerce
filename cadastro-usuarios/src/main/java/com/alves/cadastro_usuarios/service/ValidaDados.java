@@ -2,7 +2,7 @@ package com.alves.cadastro_usuarios.service;
 
 import com.alves.cadastro_usuarios.domain.Endereco;
 import com.alves.cadastro_usuarios.domain.Usuario;
-import com.alves.cadastro_usuarios.domain.dto.ResponseDTO;
+import com.alves.cadastro_usuarios.domain.dto.ViaCepResponseDTO;
 import com.alves.cadastro_usuarios.request.Requests;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -119,9 +119,14 @@ public class ValidaDados {
         if(isNullOrBlank(cep)){
             erro.add(CEP_VAZIO);
         } else {
-            ResponseDTO validaCep = requests.validaCep(cep);
-            if(validaCep.getErro() != null){
+            cep = cep.replaceAll("[^0-9]", "");
+            if(cep.length() != 8){
                 erro.add(CEP_INVALIDO);
+            } else {
+                ViaCepResponseDTO validaCep = requests.validaCep(cep);
+                if(validaCep.getErro() != null){
+                    erro.add(CEP_INVALIDO);
+                }
             }
         }
     }

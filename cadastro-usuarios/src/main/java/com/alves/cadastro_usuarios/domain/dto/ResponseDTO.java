@@ -1,6 +1,8 @@
 package com.alves.cadastro_usuarios.domain.dto;
 
+import com.alves.cadastro_usuarios.model.UsuarioModel;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,16 +12,21 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ResponseDTO {
 
-    public ViaCepResponseDTO cep;
-    public String erro;
+    public String resultado;
+    public String erros;
+    @JsonProperty("usuario")
+    public UsuarioModel usuarioModel;
 
-    public ResponseDTO(ViaCepResponseDTO cep) {
-        this.cep = cep;
+
+    public ResponseDTO(String resultado, String erros) {
+        this.resultado = resultado;
+        this.erros = erros;
     }
 
-    public ResponseDTO(String erro) {
-        this.erro = erro;
+    public ResponseDTO(UsuarioModel usuarioModel) {
+        this.usuarioModel = usuarioModel;
     }
 }

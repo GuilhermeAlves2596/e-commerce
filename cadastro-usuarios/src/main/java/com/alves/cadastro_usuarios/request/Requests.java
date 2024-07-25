@@ -2,6 +2,7 @@ package com.alves.cadastro_usuarios.request;
 
 import com.alves.cadastro_usuarios.domain.dto.ResponseDTO;
 import com.alves.cadastro_usuarios.domain.dto.ValidaCpfDTO;
+import com.alves.cadastro_usuarios.domain.dto.ViaCepResponseDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,34 +27,29 @@ public class Requests {
     @Value("${api.urlValidaCep}")
     private String URL_VALIDA_CEP;
 
-    public boolean validaCpf(String cpf){
+    public boolean validaCpf(String cpf) {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
 
         HttpEntity<String> request = new HttpEntity<>(httpHeaders);
 
-        LOGGER.info("URL VALIDA CPF ::: " +URL_VALIDA_CPF + cpf + TYPE);
+        LOGGER.info("URL VALIDA CPF ::: " + URL_VALIDA_CPF + cpf + TYPE);
 
-        ResponseEntity<ValidaCpfDTO> response = template.exchange(URL_VALIDA_CPF+cpf+TYPE, HttpMethod.GET, request, ValidaCpfDTO.class);
+        ResponseEntity<ValidaCpfDTO> response = template.exchange(URL_VALIDA_CPF + cpf + TYPE, HttpMethod.GET, request, ValidaCpfDTO.class);
 
         return Objects.requireNonNull(response.getBody()).isValid();
     }
 
-    public ResponseDTO validaCep(String cep){
-        try{
-            HttpHeaders httpHeaders = new HttpHeaders();
-            httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+    public ViaCepResponseDTO validaCep(String cep) {
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
 
-            HttpEntity<String> request = new HttpEntity<>(httpHeaders);
+        HttpEntity<String> request = new HttpEntity<>(httpHeaders);
 
-            LOGGER.info("URL VALIDA CEP ::: " +String.format(URL_VALIDA_CEP, cep));
+        LOGGER.info("URL VALIDA CEP ::: " + String.format(URL_VALIDA_CEP, cep));
 
-            ResponseEntity<ResponseDTO> response = template.exchange(String.format(URL_VALIDA_CEP, cep), HttpMethod.POST, request, ResponseDTO.class);
+        ResponseEntity<ViaCepResponseDTO> response = template.exchange(String.format(URL_VALIDA_CEP, cep), HttpMethod.GET, request, ViaCepResponseDTO.class);
 
-            return response.getBody();
-        } catch (Exception ex){
-            return new ResponseDTO("Cep invalido");
-        }
-
+        return response.getBody();
     }
 }
