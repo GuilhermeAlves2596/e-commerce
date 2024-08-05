@@ -35,7 +35,7 @@ class ValidaDadosTest {
     void setUp() {
         MockitoAnnotations.openMocks(this);
         endereco  = new Endereco("teste", "teste","teste","teste","teste","88888-000");
-        usuario = new Usuario("teste", "teste", "123.444.555-00", "2010-05-05", "teste@teste.com", "99999-1111", endereco, true);
+        usuario = new Usuario("teste", "teste", "123.444.555-00", "2010-05-05", "teste@teste.com", "99999-1111", endereco, "teste");
         viaCepResponseDTO = new ViaCepResponseDTO("teste","teste","teste","teste","teste","teste","teste","teste","teste","teste","teste",null);
     }
 
@@ -197,7 +197,7 @@ class ValidaDadosTest {
 
     @Test
     void validaDadosAdminTest(){
-        usuario.setIsAdmin(null);
+        usuario.setSenha(null);
         when(requests.validaCpf(usuario.getCpf())).thenReturn(true);
         when(requests.validaCep(anyString())).thenReturn(viaCepResponseDTO);
 

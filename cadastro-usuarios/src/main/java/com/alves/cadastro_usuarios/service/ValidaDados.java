@@ -32,7 +32,7 @@ public class ValidaDados {
         validaTelefone(usuario.getNumTelefone(), erro);
         validaEndereco(usuario.getEndereco(), erro);
         validaCep(usuario.getEndereco().getCep(), erro);
-        validaIsAdmin(usuario.getIsAdmin(), erro);
+        validaIsAdmin(usuario.getSenha(), erro);
 
         return erro;
     }
@@ -131,9 +131,9 @@ public class ValidaDados {
         }
     }
 
-    public void validaIsAdmin(Boolean admin, List<String> erro){
-        if(admin == null){
-            erro.add(ADMIN_VAZIO);
+    public void validaIsAdmin(String senha, List<String> erro){
+        if(senha == null){
+            erro.add(SENHA_VAZIO);
         }
     }
 }

@@ -39,8 +39,8 @@ class UsuarioServiceTest {
     void setUp() {
         MockitoAnnotations.openMocks(this);
         endereco  = new Endereco("teste", "teste","teste","teste","teste","teste");
-        usuario = new Usuario("teste", "teste", "teste", "teste", "teste", "teste", endereco, true);
-        usuarioModel = new UsuarioModel(1L,"teste", "teste", "teste", "teste", "teste", endereco, "teste", true);
+        usuario = new Usuario("teste", "teste", "teste", "teste", "teste", "teste", endereco, "teste");
+        usuarioModel = new UsuarioModel(1L,"teste", "teste", "teste", "teste", "teste", endereco, "teste", "teste");
     }
 
     @Test

@@ -16,7 +16,7 @@ public class UsuarioMapper {
                 .email(usuario.getEmail())
                 .endereco(usuario.getEndereco())
                 .numTelefone(usuario.getNumTelefone())
-                .isAdm(usuario.getIsAdmin())
+                .senha(usuario.getSenha())
                 .build();
     }
 
@@ -30,7 +30,7 @@ public class UsuarioMapper {
                 .email(usuario.getEmail())
                 .endereco(usuario.getEndereco())
                 .numTelefone(usuario.getNumTelefone())
-                .isAdm(usuario.getIsAdmin())
+                .senha(usuario.getSenha())
                 .build();
     }
 }

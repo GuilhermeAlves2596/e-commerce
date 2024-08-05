@@ -25,5 +25,5 @@ public class Constantes {
     public static String PAIS_VAZIO = "Pais não pode ser vazio.";
     public static String CEP_VAZIO = "CEP não pode ser vazio.";
     public static String CEP_INVALIDO = "CEP inválido.";
-    public static String ADMIN_VAZIO = "Admin não pode ser vazio.";
+    public static String SENHA_VAZIO = "Senha não pode ser vazia.";
 }

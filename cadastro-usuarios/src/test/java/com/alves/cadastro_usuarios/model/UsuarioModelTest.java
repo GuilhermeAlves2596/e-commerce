@@ -14,7 +14,7 @@ class UsuarioModelTest {
         Endereco endereco = new Endereco("teste", "teste","teste","teste","teste","teste");
         usuarioModel.setNome("teste");
 
-        UsuarioModel usuarioModel1 = new UsuarioModel(1L, "teste","teste","teste","teste","teste",endereco, "teste",true);
+        UsuarioModel usuarioModel1 = new UsuarioModel(1L, "teste","teste","teste","teste","teste",endereco, "teste","teste");
 
         assertEquals("teste", usuarioModel.getNome());
         assertEquals("teste", usuarioModel1.getSobreNome());
@@ -24,7 +24,7 @@ class UsuarioModelTest {
         assertEquals("teste", usuarioModel1.getEndereco().getBairro());
         assertEquals("teste", usuarioModel1.getNumTelefone());
         assertEquals(1L, usuarioModel1.getId());
-        assertEquals(true, usuarioModel1.getIsAdm());
+        assertEquals("teste", usuarioModel1.getSenha());
     }
 
     @Test
@@ -40,7 +40,7 @@ class UsuarioModelTest {
                 .email("teste")
                 .endereco(endereco)
                 .numTelefone("teste")
-                .isAdm(true)
+                .senha("teste")
                 .build();
 
 
@@ -52,7 +52,7 @@ class UsuarioModelTest {
         assertEquals("teste", usuarioModel.getEndereco().getBairro());
         assertEquals("teste", usuarioModel.getNumTelefone());
         assertEquals(1L, usuarioModel.getId());
-        assertEquals(true, usuarioModel.getIsAdm());
+        assertEquals("teste", usuarioModel.getSenha());
     }
 
 }

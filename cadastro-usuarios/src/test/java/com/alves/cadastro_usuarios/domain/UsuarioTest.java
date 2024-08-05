@@ -16,7 +16,7 @@ class UsuarioTest {
 
     @Test
     void usuarioTest(){
-        Usuario usuario = new Usuario("teste", "teste", "teste", "teste", "teste", "teste", endereco, true);
+        Usuario usuario = new Usuario("teste", "teste", "teste", "teste", "teste", "teste", endereco, "teste");
         usuario.setNome("teste123");
 
         assertEquals("teste123", usuario.getNome());
@@ -26,7 +26,7 @@ class UsuarioTest {
         assertEquals("teste", usuario.getEmail());
         assertEquals("teste", usuario.getNumTelefone());
         assertEquals("teste", usuario.getEndereco().getBairro());
-        assertTrue(usuario.getIsAdmin());
+        assertEquals("teste", usuario.getSenha());
 
     }
 

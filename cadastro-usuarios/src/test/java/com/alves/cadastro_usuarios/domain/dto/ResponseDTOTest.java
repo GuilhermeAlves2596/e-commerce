@@ -16,7 +16,7 @@ class ResponseDTOTest {
     @BeforeEach
     void setUp(){
         endereco = new Endereco("teste","teste","teste","teste","teste","teste");
-        usuarioModel = new UsuarioModel(1L,"teste","teste","teste","teste","teste", endereco, "teste", true);
+        usuarioModel = new UsuarioModel(1L,"teste","teste","teste","teste","teste", endereco, "teste", "teste");
     }
 
     @Test

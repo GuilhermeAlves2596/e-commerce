@@ -27,6 +27,6 @@ public class UsuarioModel {
     private Endereco endereco;
 
     private String numTelefone;
-    private Boolean isAdm;
+    private String senha;
 
 }
