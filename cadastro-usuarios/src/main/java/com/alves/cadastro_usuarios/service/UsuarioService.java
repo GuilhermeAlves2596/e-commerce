@@ -5,9 +5,11 @@ import com.alves.cadastro_usuarios.domain.dto.ResponseDTO;
 import com.alves.cadastro_usuarios.mapper.UsuarioMapper;
 import com.alves.cadastro_usuarios.model.UsuarioModel;
 import com.alves.cadastro_usuarios.repository.UsuarioRepository;
+import com.alves.cadastro_usuarios.service.Bcrypt.BcryptService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.alves.cadastro_usuarios.utils.Constantes.*;
@@ -21,36 +23,45 @@ public class UsuarioService {
     UsuarioMapper mapper;
     @Autowired
     ValidaDados dados;
+    @Autowired
+    BcryptService bcryptService;
 
     public ResponseDTO cadastrar(Usuario usuario){
+        List<String> erros = new ArrayList<>();
         UsuarioModel usuarioModel = repository.findByCpf(usuario.getCpf());
         if(usuarioModel == null){
-            List<String> erros = dados.validaDados(usuario);
+            erros = dados.validaDados(usuario);
 
             if(erros.isEmpty()){
+                usuario.setSenha(bcryptService.encoder(usuario.getSenha()));
                 repository.save(mapper.domainToModel(usuario));
                 return new ResponseDTO(USUARIO_CADASTRADO, null);
             } else {
-                return new ResponseDTO(null, erros.toString());
+                return new ResponseDTO(null, erros);
             }
         } else {
-            return new ResponseDTO(null, USUARIO_EXISTENTE);
+            erros.add(USUARIO_EXISTENTE);
+            return new ResponseDTO(null, erros);
         }
     }
 
     public ResponseDTO findByCpf(String cpf){
+        List<String> erros = new ArrayList<>();
         UsuarioModel usuarioModel = repository.findByCpf(cpf);
         if(usuarioModel == null){
-            return new ResponseDTO(null, USUARIO_NAO_ENCONTRADO);
+            erros.add(USUARIO_NAO_ENCONTRADO);
+            return new ResponseDTO(null, erros);
         }
 
         return new ResponseDTO(usuarioModel);
     }
 
     public ResponseDTO delete(String cpf){
+        List<String> erros = new ArrayList<>();
         UsuarioModel usuarioModel = repository.findByCpf(cpf);
         if(usuarioModel == null){
-            return new ResponseDTO(null, USUARIO_NAO_ENCONTRADO);
+            erros.add(USUARIO_NAO_ENCONTRADO);
+            return new ResponseDTO(null, erros);
         }
 
         repository.delete(usuarioModel);
@@ -58,17 +69,20 @@ public class UsuarioService {
     }
 
     public ResponseDTO update(Usuario usuario){
+        List<String> erros = new ArrayList<>();
         UsuarioModel usuarioModel = repository.findByCpf(usuario.getCpf());
         if(usuarioModel == null){
-            return new ResponseDTO(null, USUARIO_NAO_ENCONTRADO);
+            erros.add(USUARIO_NAO_ENCONTRADO);
+            return new ResponseDTO(null, erros);
         }
 
-        List<String> erros = dados.validaDados(usuario);
+        erros = dados.validaDados(usuario);
         if(erros.isEmpty()){
+            usuario.setSenha(bcryptService.encoder(usuario.getSenha()));
             repository.save(mapper.domainToModelUpdate(usuario, usuarioModel.getId()));
             return new ResponseDTO(USUARIO_ATUALIZADO, null);
         } else {
-            return new ResponseDTO(USUARIO_NAO_ATUALIZADO, erros.toString());
+            return new ResponseDTO(USUARIO_NAO_ATUALIZADO, erros);
         }
     }
 }

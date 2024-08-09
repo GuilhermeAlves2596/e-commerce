@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -15,12 +17,12 @@ import lombok.Setter;
 public class ResponseDTO {
 
     public String resultado;
-    public String erros;
+    public List<String> erros;
     @JsonProperty("usuario")
     public UsuarioModel usuarioModel;
 
 
-    public ResponseDTO(String resultado, String erros) {
+    public ResponseDTO(String resultado, List<String> erros) {
         this.resultado = resultado;
         this.erros = erros;
     }
