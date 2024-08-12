@@ -13,7 +13,7 @@ public class BcryptService {
     }
 
     public boolean matches(String senha, String senhaHash){
-        BCrypt.Result result =BCrypt.verifyer().verify(senha.toCharArray(), senhaHash);
+        BCrypt.Result result = BCrypt.verifyer().verify(senha.toCharArray(), senhaHash);
 
         return result.verified;
     }
