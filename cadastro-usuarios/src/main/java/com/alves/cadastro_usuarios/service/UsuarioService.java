@@ -7,6 +7,9 @@ import com.alves.cadastro_usuarios.model.UsuarioModel;
 import com.alves.cadastro_usuarios.repository.UsuarioRepository;
 import com.alves.cadastro_usuarios.service.Bcrypt.BcryptService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -15,7 +18,7 @@ import java.util.List;
 import static com.alves.cadastro_usuarios.utils.Constantes.*;
 
 @Service
-public class UsuarioService {
+public class UsuarioService implements UserDetailsService {
 
     @Autowired
     UsuarioRepository repository;
@@ -84,5 +87,15 @@ public class UsuarioService {
         } else {
             return new ResponseDTO(USUARIO_NAO_ATUALIZADO, erros);
         }
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        UsuarioModel usuarioModel = repository.findByCpf(username);
+        if(usuarioModel == null){
+            throw new UsernameNotFoundException("User not found");
+        }
+
+        return new org.springframework.security.core.userdetails.User(usuarioModel.getCpf(), usuarioModel.getSenha(), new ArrayList<>());
     }
 }

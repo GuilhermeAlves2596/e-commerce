@@ -5,6 +5,7 @@ import com.alves.login.domain.dto.ResponseLoginDTO;
 import com.alves.login.model.UsuarioModel;
 import com.alves.login.repository.UsuarioRepository;
 import com.alves.login.service.Bcrypt.BcryptService;
+import com.alves.login.service.token.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,21 +19,22 @@ public class UsuarioService {
     UsuarioRepository repository;
     @Autowired
     BcryptService bCrypt;
+    @Autowired
+    JwtTokenProvider tokenProvider;
 
     public ResponseLoginDTO login(Usuario usuario){
         UsuarioModel usuarioModel = buscaUsuario(usuario);
 
         if(usuarioModel == null){
-            return new ResponseLoginDTO(USUARIO_INVALIDO, null);
+            return new ResponseLoginDTO(USUARIO_INVALIDO);
         }
 
         if(bCrypt.matches(usuario.getSenha(), usuarioModel.getSenha())){
-            //Implementar token
+            String token = tokenProvider.generateToken(usuario.getLogin(), usuarioModel.getId());
 
-
-            return new ResponseLoginDTO("token", 1L);
+            return new ResponseLoginDTO(token);
         } else {
-            return new ResponseLoginDTO(ERRO_LOGIN, null);
+            return new ResponseLoginDTO(ERRO_LOGIN);
         }
 
     }
@@ -55,7 +57,7 @@ public class UsuarioService {
     }
 
     public boolean validaLogin(Usuario usuario){
-        return !isNullOrBlank(usuario.getLogin()) && !isNullOrBlank(usuario.getSenha());
+        return isNullOrBlank(usuario.getLogin()) || isNullOrBlank(usuario.getSenha());
     }
 
 }

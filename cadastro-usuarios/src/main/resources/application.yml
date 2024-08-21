@@ -25,3 +25,5 @@ api:
   type: "&type=cpf"
   urlValidaCep: "https://viacep.com.br/ws/%s/json/"
 
+jwt:
+  secret: "YWt1ZmFzaHZqZGF2YnNkdHV5dGF2c2hhdmR5YXN0ZmRhdGdzdmRrYWpzaHR5ZmRheWdzY3ZkbXNoamZnc2Rmczk4NzQ2MjE2Nzk="

@@ -2,8 +2,11 @@ package com.alves.login.controller;
 
 import com.alves.login.domain.Usuario;
 import com.alves.login.domain.dto.ResponseLoginDTO;
+import com.alves.login.service.UsuarioService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,10 +14,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/login")
 public class LoginController {
 
-    @GetMapping
-    public ResponseEntity<ResponseLoginDTO> login(Usuario usuario){
+    @Autowired
+    UsuarioService service;
 
+    @PostMapping
+    public ResponseEntity<ResponseLoginDTO> login(@RequestBody Usuario usuario){
 
-        return ResponseEntity.ok(new ResponseLoginDTO());
+        if(service.validaLogin(usuario)){
+            return ResponseEntity.badRequest().build();
+        }
+
+        ResponseLoginDTO dto = service.login(usuario);
+        return ResponseEntity.ok(dto);
+
     }
 }
