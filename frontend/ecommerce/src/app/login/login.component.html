@@ -1,0 +1,14 @@
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit($event)">
+  <div>
+    <label for="login">Login</label>
+    <input id="login" formControlName="login" type="text" placeholder="Digite seu e-mail ou CPF"/>
+  </div>
+
+  <div>
+    <label for="senha">Senha</label>
+    <input id="senha" formControlName="senha" type="password" placeholder="Digite sua senha"/>
+  </div>
+  <button type="submit">Login</button>
+
+  <p>Criar nova conta</p>
+</form>
